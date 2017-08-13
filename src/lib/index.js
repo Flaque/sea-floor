@@ -13,7 +13,7 @@ function createWindow(url) {
 }
 
 function buildHtmlDataUri(src) {
-  const loadView = ({ src }) => {
+  const loadView = () => {
     return `
     <!DOCTYPE html>
     <html>
@@ -22,26 +22,22 @@ function buildHtmlDataUri(src) {
         <meta charset="UTF-8">
       </head>
       <body>
-        <div id="view">
-            Boop
+        <div id="root">
         </div>
-        <script src="${src}"></script>
+        <script>
+          console.log("Hey!");
+        </script>
       </body>
     </html>
   `;
   };
 
-  return (
-    "data:text/html;charset=UTF-8," +
-    encodeURIComponent(
-      loadView({
-        src
-      })
-    )
-  );
+  return "data:text/html;charset=UTF-8," + encodeURIComponent(loadView());
 }
 
 function open(component) {
+  console.log(JSON.stringify(component));
+
   app.on("ready", () => {
     createWindow(buildHtmlDataUri("oh"));
   });
