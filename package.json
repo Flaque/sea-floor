@@ -1,0 +1,20 @@
+{
+  "name": "sea-floor",
+  "version": "0.0.0",
+  "author": "@flaque",
+  "main": "src/index.js",
+  "license": "MIT",
+  "scripts": {
+    "start": "node src/cli/runner.js src/example.js",
+    "test": "jest",
+    "test-watch": "jest --watch"
+  },
+  "devDependencies": {
+    "electron": "1.7.5",
+    "jest": "^20.0.4"
+  },
+  "dependencies": {
+    "strong-data-uri": "^1.0.4",
+    "webpack": "^3.5.4"
+  }
+}
