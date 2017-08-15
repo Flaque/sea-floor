@@ -1,8 +1,9 @@
-const { MAIN_BUNDLE_FILENAME } = require("./constants.js");
+const { MAIN_BUNDLE_FILENAME } = require("../constants.js");
+const path = require("path");
 
 const config = fileToOpen => {
   return {
-    context: path.resolve(__dirname, "../../"),
+    context: path.resolve(__dirname, "../../../"),
     entry: `./${fileToOpen}`,
     output: {
       path: path.resolve(process.cwd(), ".sea/bundle"),

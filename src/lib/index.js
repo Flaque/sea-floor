@@ -1,20 +1,22 @@
-const electron = require("electron");
+const { app, BrowserWindow, ipcMain } = require("electron");
 const dataUri = require("strong-data-uri");
 const path = require("path");
 const url = require("url");
-
-const app = electron.app;
-const BrowserWindow = electron.BrowserWindow;
+const compiler = require("../compiler");
+const ReactDOMServer = require("react-dom/server");
 
 function createWindow(url) {
-  const mainWindow = new BrowserWindow({ width: 800, height: 600 });
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    show: false
+  });
   mainWindow.loadURL(url);
   return mainWindow;
 }
 
-function buildHtmlDataUri(src) {
-  const loadView = () => {
-    return `
+function buildHtmlDataUri(react) {
+  const markup = `
     <!DOCTYPE html>
     <html>
       <head>
@@ -23,23 +25,35 @@ function buildHtmlDataUri(src) {
       </head>
       <body>
         <div id="root">
+          ${react}
         </div>
-        <script>
-          console.log("Hey!");
-        </script>
       </body>
     </html>
   `;
-  };
 
-  return "data:text/html;charset=UTF-8," + encodeURIComponent(loadView());
+  return "data:text/html;charset=UTF-8," + encodeURIComponent(markup);
+}
+
+/**
+ * TODO: Move this into a setup script or something.
+ */
+function compileRenderer() {
+  compiler.renderer("src/client/index.js").run((err, status) => {
+    console.log("Compiled Renderer");
+  });
 }
 
 function open(component) {
-  console.log(JSON.stringify(component));
+  compileRenderer();
 
   app.on("ready", () => {
-    createWindow(buildHtmlDataUri("oh"));
+    let window = createWindow(
+      buildHtmlDataUri(ReactDOMServer.renderToString(component))
+    );
+
+    window.once("ready-to-show", () => {
+      window.show();
+    });
   });
 
   return app;
