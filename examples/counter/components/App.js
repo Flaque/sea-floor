@@ -26,5 +26,4 @@ class App extends React.Component {
   }
 }
 
-const Sea = require("./lib");
-const app = Sea.open(<App />);
+export default App;

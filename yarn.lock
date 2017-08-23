@@ -336,9 +336,9 @@ babel-jest@^20.0.3:
     babel-plugin-istanbul "^4.0.0"
     babel-preset-jest "^20.0.3"
 
-babel-loader@^7.1.1:
-  version "7.1.1"
-  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.1.tgz#b87134c8b12e3e4c2a94e0546085bc680a2b8488"
+babel-loader@^7.1.2:
+  version "7.1.2"
+  resolved "https://registry.yarnpkg.com/babel-loader/-/babel-loader-7.1.2.tgz#f6cbe122710f1aa2af4d881c6d5b54358ca24126"
   dependencies:
     find-cache-dir "^1.0.0"
     loader-utils "^1.0.2"
@@ -1354,6 +1354,12 @@ estraverse@^4.1.0, estraverse@^4.1.1:
 esutils@^2.0.0, esutils@^2.0.2:
   version "2.0.2"
   resolved "https://registry.yarnpkg.com/esutils/-/esutils-2.0.2.tgz#0abf4f1caa5bcb1f7a9d8acc6dea4faaa04bac9b"
+
+eval@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/eval/-/eval-0.1.2.tgz#9f7103284c105a66df4030b2b3273165837013da"
+  dependencies:
+    require-like ">= 0.1.1"
 
 event-emitter@~0.3.5:
   version "0.3.5"
@@ -3163,6 +3169,10 @@ require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
 
+"require-like@>= 0.1.1":
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/require-like/-/require-like-0.1.2.tgz#ad6f30c13becd797010c468afa775c0c0a6b47fa"
+
 require-main-filename@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/require-main-filename/-/require-main-filename-1.0.1.tgz#97f717b69d48784f5f526a6c5aa8ffdda055a4d1"
@@ -3523,6 +3533,10 @@ to-arraybuffer@^1.0.0:
 to-fast-properties@^1.0.1:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/to-fast-properties/-/to-fast-properties-1.0.3.tgz#b83571fa4d8c25b82e231b06e3a3055de4ca1a47"
+
+tosource@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/tosource/-/tosource-1.0.0.tgz#42d88dd116618bcf00d6106dd5446f3427902ff1"
 
 tough-cookie@^2.3.2, tough-cookie@~2.3.0:
   version "2.3.2"

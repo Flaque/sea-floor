@@ -8,10 +8,9 @@ const path = require("path");
 
 // Read in input and compile it to the cache.
 const inputFile = args._[0];
-console.log(`Compiling ${inputFile}`);
-const webpack = compiler.main(inputFile);
 
-webpack.run((err, status) => {
+compiler.main(inputFile).then(status => {
+  console.log(`Compiled main process at "${inputFile}".`);
   // Launch electron
   const bundle = path.resolve(
     process.cwd(),

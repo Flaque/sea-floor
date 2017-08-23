@@ -1,4 +1,4 @@
-const compiler = require("../compiler.js");
+const compiler = require("../index.js");
 
 describe("compiler", () => {
   it("has a main compiler", () => {

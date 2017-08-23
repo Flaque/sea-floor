@@ -6,8 +6,8 @@ const path = require("path");
 const config = configs.main;
 
 describe("main config", () => {
-  test("it is targeting node", () => {
-    expect(config("dummy").target).toBe("electron");
+  test("it is targeting electron", () => {
+    expect(config("dummy").target).toBe("electron-main");
   });
 
   test("it has an entry point", () => {

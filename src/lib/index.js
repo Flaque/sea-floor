@@ -4,6 +4,18 @@ const path = require("path");
 const url = require("url");
 const compiler = require("../compiler");
 const ReactDOMServer = require("react-dom/server");
+const fs = require("fs");
+const tosource = require("tosource");
+const React = require("react");
+const errors = require("./errors.js");
+const _eval = require("eval");
+
+const COMPONENT_FILEPATH = path.join(
+  process.cwd(),
+  ".sea",
+  "bundle",
+  compiler.constants.USER_BUNDLE_FILENAME
+);
 
 function createWindow(url) {
   const mainWindow = new BrowserWindow({
@@ -16,6 +28,8 @@ function createWindow(url) {
 }
 
 function buildHtmlDataUri(react) {
+  const src = path.join(process.cwd(), "./src/client/index.js");
+
   const markup = `
     <!DOCTYPE html>
     <html>
@@ -28,6 +42,9 @@ function buildHtmlDataUri(react) {
           ${react}
         </div>
       </body>
+      <footer>
+        
+      </footer>
     </html>
   `;
 
@@ -38,25 +55,44 @@ function buildHtmlDataUri(react) {
  * TODO: Move this into a setup script or something.
  */
 function compileRenderer() {
-  compiler.renderer("src/client/index.js").run((err, status) => {
-    console.log("Compiled Renderer");
-  });
+  return compiler.renderer("src/client/index.js");
 }
 
-function open(component) {
-  compileRenderer();
-
+/**
+ * Opens a react component in an Electron app
+ * @param {React} component 
+ */
+function openApp(component) {
   app.on("ready", () => {
     let window = createWindow(
-      buildHtmlDataUri(ReactDOMServer.renderToString(component))
+      buildHtmlDataUri(ReactDOMServer.renderToString(component), component)
     );
 
     window.once("ready-to-show", () => {
       window.show();
+      window.webContents.send("sea-update", component);
     });
   });
 
   return app;
+}
+
+/**
+ * Opens a new Electron window with a React Component filepath. 
+ * @param {String} filepath 
+ * @return {Promise} a promise for when the project opens.
+ */
+function open(filepath) {
+  if (!path.isAbsolute(filepath)) {
+    throw errors.PATH_IS_NOT_ABSOLUTE(filepath);
+  }
+
+  compileRenderer();
+
+  return compiler.component(filepath).then(stats => {
+    const App = __non_webpack_require__(COMPONENT_FILEPATH).app.default;
+    return openApp(<App />);
+  });
 }
 
 module.exports = { open };
