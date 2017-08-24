@@ -1,11 +1,13 @@
-const { compile, config } = require("../compiler.js");
-const { RENDERER_BUNDLE_FILENAME } = require("../constants.js");
+const configs = require("../index.js");
+const { MAIN_BUNDLE_FILENAME } = require("../../constants.js");
 const fs = require("fs");
 const path = require("path");
 
-describe("config", () => {
-  test("it is targeting node", () => {
-    expect(config("dummy").target).toBe("electron");
+const config = configs.main;
+
+describe("main config", () => {
+  test("it is targeting electron", () => {
+    expect(config("dummy").target).toBe("electron-main");
   });
 
   test("it has an entry point", () => {
@@ -13,7 +15,7 @@ describe("config", () => {
   });
 
   test("it has an output", () => {
-    expect(config("dummy").output.filename).toBe(RENDERER_BUNDLE_FILENAME);
+    expect(config("dummy").output.filename).toBe(MAIN_BUNDLE_FILENAME);
   });
 
   test("it's using a valid context", () => {
