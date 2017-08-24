@@ -21,14 +21,24 @@ function createWindow(url) {
   const mainWindow = new BrowserWindow({
     width: 800,
     height: 600,
-    show: false
+    show: true
   });
   mainWindow.loadURL(url);
   return mainWindow;
 }
 
-function buildHtmlDataUri(react) {
-  const src = path.join(process.cwd(), "./src/client/index.js");
+function nodeModulePath(mod) {
+  var nodeModDir = __non_webpack_require__.resolve(mod);
+  var dirnm = "node_modules";
+  var pos = nodeModDir.lastIndexOf(dirnm);
+  if (pos != -1) nodeModDir = nodeModDir.substr(0, pos + dirnm.length + 1);
+
+  return nodeModDir + mod;
+}
+
+function buildHtmlDataUri(component, sourceFilepath) {
+  const reactDOMPath = nodeModulePath("react-dom");
+  const reactPath = nodeModulePath("react");
 
   const markup = `
     <!DOCTYPE html>
@@ -37,13 +47,19 @@ function buildHtmlDataUri(react) {
         <title>Hi</title>
         <meta charset="UTF-8">
       </head>
-      <body>
         <div id="root">
-          ${react}
+          ${component}
         </div>
-      </body>
       <footer>
+        <script> 
+        var ReactDOM = require("${reactDOMPath}");
+        var React = require("${reactPath}");
+
+        var componentFunc = require("${sourceFilepath}").app.default; 
+        var component = React.createElement(componentFunc, {}, null);
         
+        ReactDOM.render(component, document.getElementById("root"));
+        </script>
       </footer>
     </html>
   `;
@@ -62,10 +78,10 @@ function compileRenderer() {
  * Opens a react component in an Electron app
  * @param {React} component 
  */
-function openApp(component) {
+function openApp(component, sourceFilepath) {
   app.on("ready", () => {
     let window = createWindow(
-      buildHtmlDataUri(ReactDOMServer.renderToString(component), component)
+      buildHtmlDataUri(ReactDOMServer.renderToString(component), sourceFilepath)
     );
 
     window.once("ready-to-show", () => {
@@ -73,6 +89,8 @@ function openApp(component) {
       window.webContents.send("sea-update", component);
     });
   });
+
+  app._events.ready(); // TODO: Setup a better compile->launch pipeline because this is a hack
 
   return app;
 }
@@ -91,7 +109,7 @@ function open(filepath) {
 
   return compiler.component(filepath).then(stats => {
     const App = __non_webpack_require__(COMPONENT_FILEPATH).app.default;
-    return openApp(<App />);
+    return openApp(<App />, COMPONENT_FILEPATH);
   });
 }
 

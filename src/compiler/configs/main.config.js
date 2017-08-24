@@ -43,7 +43,7 @@ const config = fileToOpen => {
       __dirname: true,
       __filename: true
     },
-    target: "electron-main",
+    target: "electron",
     module: reactModules,
     externals: getExternals()
   };

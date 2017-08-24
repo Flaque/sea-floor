@@ -1,6 +1,3 @@
-/**
- * TODO: NOT BEING USED YET BUT WILL BE EVENTUALLY.
- */
 console.log("Sea has created an electron window!");
 
 var { ipcRenderer, remote } = require("electron");
