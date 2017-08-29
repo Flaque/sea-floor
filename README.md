@@ -6,6 +6,7 @@ In fact, your entire electron app can be:
 
 ``` js 
 import Sea from 'sea-floor';
+import path from 'path';
 
 Sea.open(path.resolve(__dirname, "./path/to/react/component.js"));
 ```
