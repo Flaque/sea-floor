@@ -5,7 +5,6 @@ const url = require("url");
 const compiler = require("../compiler");
 const ReactDOMServer = require("react-dom/server");
 const fs = require("fs");
-const tosource = require("tosource");
 const React = require("react");
 const errors = require("./errors.js");
 const _eval = require("eval");

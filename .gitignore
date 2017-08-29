@@ -1,3 +1,4 @@
 .sea
 node_modules
 *.log
+dist

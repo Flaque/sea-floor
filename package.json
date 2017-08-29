@@ -1,17 +1,20 @@
 {
   "name": "sea-floor",
-  "version": "0.0.0",
+  "version": "0.0.4",
   "author": "@flaque",
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "start": "node src/cli/index.js examples/counter/main.js",
+    "start": "node ./dist/cli.js examples/counter/main.js",
     "test": "jest",
-    "test-watch": "jest --watch"
+    "test-watch": "jest --watch",
+    "prepare": "webpack --config src/cli/cli.config.js"
   },
   "devDependencies": {
-    "electron": "1.7.5",
     "jest": "^20.0.4"
+  },
+  "bin": {
+    "sea": "./dist/cli.js"
   },
   "dependencies": {
     "babel-core": "^6.25.0",
@@ -22,7 +25,7 @@
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "strong-data-uri": "^1.0.4",
-    "tosource": "^1.0.0",
-    "webpack": "^3.5.4"
+    "webpack": "^3.5.4",
+    "electron": "1.7.5"
   }
 }
