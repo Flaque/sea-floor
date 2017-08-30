@@ -42,4 +42,4 @@ function component(file) {
   });
 }
 
-module.exports = { main, renderer, component, constants };
+module.exports = { main, renderer, component, constants, configs };

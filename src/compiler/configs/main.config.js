@@ -43,6 +43,9 @@ const config = fileToOpen => {
       __dirname: true,
       __filename: true
     },
+    resolveLoader: {
+      modules: ["node_modules", "node_modules/sea-floor/node_modules"]
+    },
     target: "electron-main",
     module: reactModules,
     externals: getExternals()

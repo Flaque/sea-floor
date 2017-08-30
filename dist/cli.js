@@ -211,7 +211,7 @@ function component(file) {
   });
 }
 
-module.exports = { main, renderer, component, constants };
+module.exports = { main, renderer, component, constants, configs };
 
 
 /***/ }),
@@ -279,6 +279,9 @@ const config = fileToOpen => {
     node: {
       __dirname: true,
       __filename: true
+    },
+    resolveLoader: {
+      modules: ["node_modules", "node_modules/sea-floor/node_modules"]
     },
     target: "electron-main",
     module: reactModules,
@@ -398,7 +401,7 @@ module.exports = require("commander");
 /* 16 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"sea-floor","version":"0.1.3","author":"@flaque","main":"src/index.js","license":"MIT","description":"A little tool for running electron apps.","scripts":{"start":"node ./dist/cli.js examples/counter/main.js","test":"jest","test-watch":"jest --watch","prepublish":"webpack --config src/cli/cli.config.js"},"devDependencies":{"jest":"^20.0.4"},"bin":{"sea":"./dist/cli.js"},"dependencies":{"ajv-keywords":"^2.1.0","babel-core":"^6.25.0","babel-loader":"^7.1.2","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","commander":"^2.11.0","electron":"1.7.5","eval":"^0.1.2","react":"^15.6.1","react-dom":"^15.6.1","strong-data-uri":"^1.0.4","webpack":"^3.5.4"}}
+module.exports = {"name":"sea-floor","version":"0.2.3","author":"@flaque","main":"dist/lib.js","license":"MIT","description":"A little tool for running electron apps.","scripts":{"start":"node ./dist/cli.js examples/counter/main.js","test":"jest","test-watch":"jest --watch","prepublish":"webpack --config src/cli/cli.config.js; webpack --config src/lib/lib.config.js"},"devDependencies":{"jest":"^20.0.4"},"bin":{"sea":"./dist/cli.js"},"dependencies":{"ajv-keywords":"^2.1.0","babel-core":"^6.25.0","babel-loader":"^7.1.2","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","commander":"^2.11.0","electron":"1.7.5","eval":"^0.1.2","react":"^15.6.1","react-dom":"^15.6.1","strong-data-uri":"^1.0.4","webpack":"^3.5.4"}}
 
 /***/ })
 /******/ ]);
