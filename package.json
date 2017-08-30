@@ -31,5 +31,12 @@
     "react-dom": "^15.6.1",
     "strong-data-uri": "^1.0.4",
     "webpack": "^3.5.4"
+  },
+  "jest": {
+    "projects": ["<rootDir>/src/*"],
+    "collectCoverage": true,
+    "coverageDirectory": "<rootDir>/coverage",
+    "coveragePathIgnorePatterns": ["/node_modules/"],
+    "coverageReporters": ["text", "lcov"]
   }
 }
