@@ -11,6 +11,12 @@ import path from 'path';
 Sea.open(path.resolve(__dirname, "./path/to/react/component.js"));
 ```
 
+Install it in your project and globally with:
+``` sh
+$ npm install --save sea-floor@latest
+$ npm install -g sea-floor@latest
+```
+
 Then run your app with:
 
 ``` sh
