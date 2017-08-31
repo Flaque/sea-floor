@@ -1,16 +1,17 @@
 {
   "name": "sea-floor",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "author": "@flaque",
   "main": "dist/lib.js",
   "license": "MIT",
   "description": "A little tool for running electron apps.",
   "scripts": {
-    "start": "node ./dist/cli.js examples/counter/main.js",
+    "start": "yarn build; node ./dist/cli.js dev examples/counter/main.js",
     "test": "jest",
     "test-watch": "jest --watch",
-    "prepublish":
-      "webpack --config src/cli/cli.config.js; webpack --config src/lib/lib.config.js"
+    "build":
+      "webpack --config src/cli/cli.config.js; webpack --config src/lib/lib.config.js",
+    "prepublish": "yarn build"
   },
   "devDependencies": {
     "jest": "^20.0.4"

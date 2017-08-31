@@ -8,7 +8,7 @@ In fact, your entire electron app can be:
 import Sea from 'sea-floor';
 import path from 'path';
 
-Sea.open(path.resolve(__dirname, "./path/to/react/component.js"));
+Sea.open(path.join(__dirname, "./path/to/react/component.js"));
 ```
 
 Install it in your project and globally with:
