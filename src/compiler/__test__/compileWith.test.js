@@ -16,4 +16,9 @@ describe("compileWith", () => {
   test("it is defined as a function", () => {
     expect(isFunction(compileWith)).toBe(true);
   });
+
+  test("it can reject if there's an error", async () => {
+    expect.assertions(1);
+    await expect(compileWith("main", "idontexist.jpeg")).rejects.toBeDefined();
+  });
 });

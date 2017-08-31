@@ -4,7 +4,7 @@ const path = require("path");
 
 const config = fileToOpen => {
   return {
-    entry: `${fileToOpen}`,
+    entry: `./${fileToOpen}`,
     output: {
       path: path.resolve(process.cwd(), ".sea/bundle"),
       filename: USER_BUNDLE_FILENAME,

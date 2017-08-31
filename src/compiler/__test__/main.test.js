@@ -12,5 +12,19 @@ describe("compiler", () => {
     ).resolves.toBeDefined();
   });
 
+  it("can compile a renderer client file with no errors", () => {
+    expect.assertions(1);
+    return expect(
+      compiler.renderer("src/client/index.js")
+    ).resolves.toBeDefined();
+  });
+
+  it("can compile a component file with no errors", () => {
+    expect.assertions(1);
+    return expect(
+      compiler.component("examples/counter/components/App.js")
+    ).resolves.toBeDefined();
+  });
+
   // TODO Create tests for compiler.renderer and compiler.component
 });
