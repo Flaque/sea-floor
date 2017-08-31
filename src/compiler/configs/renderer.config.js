@@ -7,7 +7,8 @@ const config = fileToOpen => {
     output: {
       path: path.resolve(process.cwd(), ".sea/bundle"),
       filename: RENDERER_BUNDLE_FILENAME
-    }
+    },
+    target: "electron-renderer"
   };
 };
 
