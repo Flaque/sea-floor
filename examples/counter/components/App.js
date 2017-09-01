@@ -1,4 +1,7 @@
 import React from "react";
+import Foo from "./Foo.js";
+
+console.log(Foo);
 
 class App extends React.Component {
   constructor(props) {
@@ -17,9 +20,8 @@ class App extends React.Component {
   render() {
     return (
       <div>
-        <h1>
-          {this.state.count}
-        </h1>
+        <h1>{this.state.count}</h1>
+        <Foo />
         <button onClick={this.onClick.bind(this)}>Count Up!!</button>
       </div>
     );

@@ -1,6 +1,6 @@
 {
   "name": "sea-floor",
-  "version": "0.3.2",
+  "version": "0.3.3",
   "author": "@flaque",
   "main": "dist/lib.js",
   "license": "MIT",
@@ -19,6 +19,11 @@
   "bin": {
     "sea": "./dist/cli.js"
   },
+  "peerDependencies": {
+    "electron": "1.7.5",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
   "dependencies": {
     "ajv-keywords": "^2.1.0",
     "babel-core": "^6.25.0",
@@ -26,12 +31,8 @@
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "commander": "^2.11.0",
-    "electron": "1.7.5",
     "eval": "^0.1.2",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "strong-data-uri": "^1.0.4",
-    "webpack": "^3.5.4"
+    "strong-data-uri": "^1.0.4"
   },
   "jest": {
     "projects": ["<rootDir>/src/*"],
