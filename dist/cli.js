@@ -92,10 +92,9 @@ module.exports = require("fs");
 /***/ (function(module, exports, __webpack_require__) {
 
 const main = __webpack_require__(7);
-const renderer = __webpack_require__(8);
-const component = __webpack_require__(9);
+const component = __webpack_require__(8);
 
-module.exports = { main, renderer, component };
+module.exports = { main, component };
 
 
 /***/ }),
@@ -129,12 +128,12 @@ module.exports = {
 /***/ (function(module, exports, __webpack_require__) {
 
 const compiler = __webpack_require__(6);
-const args = __webpack_require__(12)(process.argv.slice(2));
-const electron = __webpack_require__(13);
-const proc = __webpack_require__(14);
+const args = __webpack_require__(11)(process.argv.slice(2));
+const electron = __webpack_require__(12);
+const proc = __webpack_require__(13);
 const path = __webpack_require__(0);
-const cli = __webpack_require__(16);
-const pkg = __webpack_require__(17);
+const cli = __webpack_require__(15);
+const pkg = __webpack_require__(16);
 
 /**
  * Launch an electron app.
@@ -182,7 +181,7 @@ const path = __webpack_require__(0);
 const fs = __webpack_require__(2);
 const configs = __webpack_require__(3);
 const constants = __webpack_require__(1);
-const compileWith = __webpack_require__(10);
+const compileWith = __webpack_require__(9);
 
 /**
  * Creates a compiler for the "main" or node.js files running on electron
@@ -190,14 +189,6 @@ const compileWith = __webpack_require__(10);
  */
 function main(file) {
   return compileWith("main", file);
-}
-
-/**
- * Creates a compiler for the "renderer" or browser-side code. 
- * @return {Promise}
- */
-function renderer(file) {
-  return compileWith("renderer", file);
 }
 
 /**
@@ -209,7 +200,7 @@ function component(file) {
   return compileWith("component", file);
 }
 
-module.exports = { main, renderer, component, constants, configs };
+module.exports = { main, component, constants, configs };
 
 
 /***/ }),
@@ -278,27 +269,6 @@ module.exports = config;
 /* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const { RENDERER_BUNDLE_FILENAME } = __webpack_require__(1);
-const path = __webpack_require__(0);
-
-const config = fileToOpen => {
-  return {
-    entry: `./${fileToOpen}`,
-    output: {
-      path: path.resolve(process.cwd(), ".sea/bundle"),
-      filename: RENDERER_BUNDLE_FILENAME
-    },
-    target: "electron-renderer"
-  };
-};
-
-module.exports = config;
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
 const { USER_BUNDLE_FILENAME } = __webpack_require__(1);
 const reactModules = __webpack_require__(4);
 const path = __webpack_require__(0);
@@ -321,10 +291,10 @@ module.exports = config;
 
 
 /***/ }),
-/* 10 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
-const webpack = __webpack_require__(11);
+const webpack = __webpack_require__(10);
 const configs = __webpack_require__(3);
 
 /**
@@ -348,32 +318,32 @@ module.exports = compileWith;
 
 
 /***/ }),
-/* 11 */
+/* 10 */
 /***/ (function(module, exports) {
 
 module.exports = require("webpack");
 
 /***/ }),
-/* 12 */
+/* 11 */
 /***/ (function(module, exports) {
 
 module.exports = require("minimist");
 
 /***/ }),
-/* 13 */
+/* 12 */
 /***/ (function(module, exports) {
 
 module.exports = require("electron");
 
 /***/ }),
-/* 14 */
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 /**
  * A node child process that spits out it's info to the main console.log
  */
 
-const proc = __webpack_require__(15);
+const proc = __webpack_require__(14);
 
 /**
  * Spawns a child process that will log it's info.
@@ -401,22 +371,22 @@ module.exports = { spawn };
 
 
 /***/ }),
-/* 15 */
+/* 14 */
 /***/ (function(module, exports) {
 
 module.exports = require("child_process");
 
 /***/ }),
-/* 16 */
+/* 15 */
 /***/ (function(module, exports) {
 
 module.exports = require("commander");
 
 /***/ }),
-/* 17 */
+/* 16 */
 /***/ (function(module, exports) {
 
-module.exports = {"name":"sea-floor","version":"0.2.3","author":"@flaque","main":"dist/lib.js","license":"MIT","description":"A little tool for running electron apps.","scripts":{"start":"yarn build; node ./dist/cli.js dev examples/counter/main.js","test":"jest","test-watch":"jest --watch","build":"webpack --config src/cli/cli.config.js; webpack --config src/lib/lib.config.js","prepublish":"yarn build"},"devDependencies":{"jest":"^20.0.4"},"bin":{"sea":"./dist/cli.js"},"dependencies":{"ajv-keywords":"^2.1.0","babel-core":"^6.25.0","babel-loader":"^7.1.2","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","commander":"^2.11.0","electron":"1.7.5","eval":"^0.1.2","react":"^15.6.1","react-dom":"^15.6.1","strong-data-uri":"^1.0.4","webpack":"^3.5.4"},"jest":{"projects":["<rootDir>/src/*"],"collectCoverage":true,"coverageDirectory":"<rootDir>/coverage","coveragePathIgnorePatterns":["/node_modules/"],"coverageReporters":["text","lcov"]}}
+module.exports = {"name":"sea-floor","version":"0.3.1","author":"@flaque","main":"dist/lib.js","license":"MIT","description":"A little tool for running electron apps.","scripts":{"start":"yarn build; node ./dist/cli.js dev examples/counter/main.js","test":"jest","test-watch":"jest --watch","build":"webpack --config src/cli/cli.config.js; webpack --config src/lib/lib.config.js","prepublish":"yarn build"},"devDependencies":{"jest":"^20.0.4"},"bin":{"sea":"./dist/cli.js"},"dependencies":{"ajv-keywords":"^2.1.0","babel-core":"^6.25.0","babel-loader":"^7.1.2","babel-preset-es2015":"^6.24.1","babel-preset-react":"^6.24.1","commander":"^2.11.0","electron":"1.7.5","eval":"^0.1.2","react":"^15.6.1","react-dom":"^15.6.1","strong-data-uri":"^1.0.4","webpack":"^3.5.4"},"jest":{"projects":["<rootDir>/src/*"],"collectCoverage":true,"coverageDirectory":"<rootDir>/coverage","coveragePathIgnorePatterns":["/node_modules/"],"coverageReporters":["text","lcov"]}}
 
 /***/ })
 /******/ ]);

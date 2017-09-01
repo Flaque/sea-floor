@@ -1,5 +1,4 @@
 const main = require("./main.config.js");
-const renderer = require("./renderer.config.js");
 const component = require("./userComponent.config.js");
 
-module.exports = { main, renderer, component };
+module.exports = { main, component };

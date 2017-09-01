@@ -13,14 +13,6 @@ function main(file) {
 }
 
 /**
- * Creates a compiler for the "renderer" or browser-side code. 
- * @return {Promise}
- */
-function renderer(file) {
-  return compileWith("renderer", file);
-}
-
-/**
  * Creates a compiler for a React Component file
  * @param {String} file 
  * @return {Promise}
@@ -29,4 +21,4 @@ function component(file) {
   return compileWith("component", file);
 }
 
-module.exports = { main, renderer, component, constants, configs };
+module.exports = { main, component, constants, configs };

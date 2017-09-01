@@ -14,10 +14,6 @@ describe("compiler", () => {
     return testCompiler("main", "examples/counter/main.js");
   });
 
-  it("can compile a renderer client file with no errors", () => {
-    return testCompiler("renderer", "src/client/index.js");
-  });
-
   it("can compile a component file with no errors", () => {
     return testCompiler("component", "examples/counter/components/App.js");
   });

@@ -1,4 +1,4 @@
-const { app, BrowserWindow, ipcMain } = require("electron");
+const { app, ipcMain } = require("electron");
 const dataUri = require("strong-data-uri");
 const path = require("path");
 const url = require("url");
@@ -17,13 +17,6 @@ const COMPONENT_FILEPATH = path.join(
   "bundle",
   compiler.constants.USER_BUNDLE_FILENAME
 );
-
-/**
- * TODO: Move this into a setup script or something.
- */
-function compileRenderer() {
-  return compiler.renderer("src/client/index.js");
-}
 
 /**
  * Opens a react component in an Electron app
@@ -57,8 +50,6 @@ function openApp(component, sourceFilepath, windowOptions) {
  * @return {Promise} a promise for when the project opens.
  */
 function open(filepath, windowOptions) {
-  compileRenderer();
-
   return compiler.component(filepath).then(stats => {
     const App = __non_webpack_require__(COMPONENT_FILEPATH).app.default;
     return openApp(<App />, COMPONENT_FILEPATH, windowOptions);

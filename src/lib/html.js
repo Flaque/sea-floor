@@ -1,3 +1,5 @@
+const path = require("path");
+
 function nodeModulePath(mod) {
   var nodeModDir = __non_webpack_require__.resolve(mod);
   var dirnm = "node_modules";
@@ -5,6 +7,10 @@ function nodeModulePath(mod) {
   if (pos != -1) nodeModDir = nodeModDir.substr(0, pos + dirnm.length + 1);
 
   return nodeModDir + mod;
+}
+
+function resolveRendererPath() {
+  return path.resolve("../../dist/renderer.js");
 }
 
 function buildHtmlDataUri(component, sourceFilepath) {
