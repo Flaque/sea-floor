@@ -4,14 +4,22 @@ const fs = require("fs");
 
 // Ignores weird node module issues
 var nodeModules = {};
-fs
-  .readdirSync("node_modules")
-  .filter(function(x) {
-    return [".bin"].indexOf(x) === -1;
-  })
-  .forEach(function(mod) {
-    nodeModules[mod] = "commonjs " + mod;
-  });
+
+try {
+  console.log("Searching for...", path.resolve("node_modules"));
+  fs
+    .readdirSync(path.resolve("node_modules"))
+    .filter(function(x) {
+      return [".bin"].indexOf(x) === -1;
+    })
+    .forEach(function(mod) {
+      nodeModules[mod] = "commonjs " + mod;
+    });
+} catch (error) {
+  console.error(
+    `It seems like you don't have a node_modules folder? That's probably bad so we threw an error: ${error}`
+  );
+}
 
 // The actual config
 module.exports = {
